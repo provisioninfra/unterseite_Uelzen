@@ -50,7 +50,7 @@ Zugangsdaten gehören nicht in dieses Repo (siehe `WORDPRESS-REGELN.md` im Kamer
    Videoüberwachung Uelzen“, `slug` `uelzen`, `status` `draft`.
 2. Menü „Menü Uelzen“ (Slug `menue-uelzen`) anlegen – Name muss mit „Me…“ beginnen, damit „Main“ alphabetisch erstes
    Menü bleibt (Fallback der Footer-Nav-Widgets). Einträge wie im Menü Lüneburg: Schließanlagen `#schliessanlagen`,
-   Videoüberwachung `#kamera`, Ablauf `#arbeiten`, Standort `#standort`, FAQ `#FAQ`.
+   Videoüberwachung `#kamera`, So arbeiten wir `#arbeiten`, Über uns `#ueber`, FAQ `#FAQ`.
 3. Elementor-Editor der neuen Seite öffnen (`post.php?post=ID&action=elementor`) und speichern:
    `elementorCommon.ajax.addRequest('save_builder', { data: { status: 'draft', elements, settings } })` mit `elements`
    und `settings` aus `elementor/uelzen.elementor.json`. Kein Vorlagen-Import (verliert das Design).
