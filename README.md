@@ -3,6 +3,9 @@
 Unterseite **/uelzen/** für provision-infra.de: mechanische & elektronische Schließanlagen, Zutrittskontrolle sowie
 Video- und Kameraüberwachung für Betriebe, Praxen und Hausverwaltungen in Uelzen und im Landkreis Uelzen.
 
+**Live seit 27.10.2026:** https://provision-infra.de/uelzen/ (WordPress-Seite #4605, Elementor; Menü „Menü Uelzen“ #19,
+Slug `menue-uelzen`). Dieses Repository enthält die Quelle der Elementor-Daten, das Build-Skript und das SEO-Konzept.
+
 Die Seite ist das Uelzen-Gegenstück zur Lüneburg-Seite (Repo `provisioninfra/schliessanlagen-lueneburg`, Seite #4496,
 https://provision-infra.de/lueneburg/). Design, Abschnittsfolge, Animationen und Medien sind 1:1 übernommen; alle Texte,
 die FAQ, das Schema-Markup und die SEO-Werte sind neu für Uelzen geschrieben (keine Textduplikate zur Lüneburg-Seite).
@@ -39,7 +42,7 @@ python3 -I tools/build_uelzen.py elementor/quelle-lueneburg.elementor.json eleme
 Das Skript bricht ab, wenn ein Quelltext nicht mehr gefunden wird, ein Lüneburg-Rest übrig bleibt, ein alter
 CTA-Link steht, Element-IDs doppelt sind oder Titel/Description zu lang werden.
 
-## In WordPress anlegen
+## In WordPress anlegen (so wurde die Seite am 27.10.2026 angelegt)
 
 Zugangsdaten gehören nicht in dieses Repo (siehe `WORDPRESS-REGELN.md` im Kamera-Repo). Vorgehen wie bei /lueneburg/:
 
@@ -53,5 +56,11 @@ Zugangsdaten gehören nicht in dieses Repo (siehe `WORDPRESS-REGELN.md` im Kamer
    und `settings` aus `elementor/uelzen.elementor.json`. Kein Vorlagen-Import (verliert das Design).
 4. Yoast im Block-Editor über `wp.data.dispatch('yoast-seo/editor')` setzen: Werte aus dem `seo`-Block der JSON
    (Titel, Description, Fokus-Keyphrase, Breadcrumb-Titel `Uelzen`, `index`, OG-Bild), dann `savePost()`.
+   Lerneffekt: nach `updateData` etwa 6 Sekunden warten, bis Yoast die Metabox-Felder (`#yoast_wpseo_title`,
+   `#yoast_wpseo_metadesc`, …) befüllt hat, sonst speichert der Beitrag ohne SEO-Werte; Ergebnis per REST
+   (`yoast_head_json`) prüfen.
 5. Vorschau prüfen (Desktop/Mobil, `?nowprocket=1`), dann veröffentlichen und die Checkliste in `seo/uelzen-seo.md`
    Abschnitt 8 abarbeiten (Sitemap, Search Console, interne Links, Unternehmensprofil).
+
+Der Server drosselt schnelle Folgeaufrufe (HTTP 429, nginx): zwischen REST-Aufrufen 3–5 Sekunden Pause, Elementor-Save
+bei 429 nach 30 Sekunden wiederholen.

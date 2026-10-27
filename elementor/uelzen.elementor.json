@@ -42873,7 +42873,7 @@
   "custom_css": "html, body {\n  max-width: 100%;\n  overflow-x: clip;\n}\n\n\n\n\n\n.shadeup {\n  position: relative;\n}\n\n.shadeup::before {\n  content: \"\";\n  position: absolute;\n  top: -10px; /* Centers the 20px height over the top boundary line */\n  left: 0;\n  width: 100%;\n  height: 30px;\n  background: linear-gradient(\n    to bottom,\n    transparent 0%,\n    #010c2d 0%,\n    transparent 100%\n  );\n  pointer-events: none; /* Prevents interference with clicks */\n  z-index: 10; /* Keeps the gradient above adjacent containers */\n}\n\n",
   "template": "default",
   "post_title": "Schließanlagen & Videoüberwachung Uelzen",
-  "post_status": "draft",
+  "post_status": "publish",
   "post_excerpt": "",
   "post_featured_image": {
    "url": "https://provision-infra.de/wp-content/uploads/2026/05/provision_header_02-1.png",

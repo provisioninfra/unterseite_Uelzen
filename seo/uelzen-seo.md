@@ -1,12 +1,21 @@
 # SEO-Konzept: /uelzen/ – Schließanlagen & Videoüberwachung Uelzen
 
-Stand: 27.10.2026 · Ziel-URL: https://provision-infra.de/uelzen/ (WordPress/Elementor, noch nicht angelegt) ·
+Stand: 27.10.2026 · Seite: https://provision-infra.de/uelzen/ (WordPress-Seite #4605, Elementor, **veröffentlicht am 27.10.2026**) ·
 Vorlage: /lueneburg/ (Seite #4496, Repo `provisioninfra/schliessanlagen-lueneburg`)
 
 Ziel: bestmögliche Google-Platzierung für lokale, kommerzielle Suchanfragen rund um Schließanlagen, Zutrittskontrolle,
 Sicherheitstechnik und Videoüberwachung in Uelzen und im Landkreis Uelzen. Besonderheit gegenüber Lüneburg: Uelzen ist
 der **Heimat-Landkreis** von ProVision Infra (Sitz Bad Bevensen, rund 15 km nördlich der Kreisstadt). Dieser Vorteil
 („aus dem eigenen Landkreis“, „in 20 Minuten vor Ort“) ist das Leitmotiv aller Texte.
+
+Angelegte Objekte in WordPress (27.10.2026):
+
+| Objekt | ID | Hinweis |
+| --- | --- | --- |
+| Seite „Schließanlagen & Videoüberwachung Uelzen“ | 4605 | `/uelzen/`, index, in `page-sitemap.xml` |
+| Menü „Menü Uelzen“ (Slug `menue-uelzen`) | 19 | fünf Anker-Links (Schließanlagen, Videoüberwachung, So arbeiten wir, Über uns, FAQ), in Header und Footer der Seite |
+
+Formulare und Funnel-Seiten wurden nicht angelegt; die Seite nutzt den gemeinsamen Funnel `/anfrage-auswahl/` (Formular 5).
 
 ## 1. Keyword-Set
 
@@ -138,10 +147,10 @@ Links identisch zur Lüneburg-Seite bleiben; bei Bedarf `FUNNEL_URL` in `tools/b
 
 ## 8. Veröffentlichung und Indexierung – Checkliste
 
-- [ ] Seite in WordPress anlegen (Entwurf), Elementor-Daten speichern, Yoast-Werte setzen (README „In WordPress anlegen“)
-- [ ] Menü „Menü Uelzen“ (`menue-uelzen`) mit fünf Anker-Links anlegen; Header- und Footer-Widgets zeigen bereits darauf
-- [ ] Vorschau Desktop/Mobil prüfen (`?nowprocket=1`), Texte gegen `seo/uelzen-texte.md` lesen
-- [ ] Veröffentlichen; prüfen: `https://provision-infra.de/uelzen/` liefert 200, Canonical, `index,follow`, in `page-sitemap.xml`
+- [x] Seite in WordPress anlegen (Entwurf), Elementor-Daten speichern, Yoast-Werte setzen (27.10.2026, Seite #4605)
+- [x] Menü „Menü Uelzen“ (`menue-uelzen`, ID 19) mit fünf Anker-Links angelegt; Header- und Footer-Widgets zeigen darauf
+- [x] Vorschau Desktop (1440 px) und Mobil (iPhone 13) geprüft: keine horizontale Scrollbar, Menü, NAP-Block, 11 FAQ, Leistungs-Animation wie auf /lueneburg/
+- [x] Veröffentlicht; geprüft: `https://provision-infra.de/uelzen/` liefert 200, Canonical auf sich selbst, `index, follow`, in `page-sitemap.xml` (27.10.2026)
 - [ ] **Interne Verlinkung** (stärkster Hebel): Hauptmenü „Mehr“ → Uelzen (wie Lüneburg) in Header und Footer aller Seiten;
       auf `/lueneburg/` im Standort-Text „Uelzen“ auf `/uelzen/` verlinken, auf `/uelzen/` „Lüneburg“ auf `/lueneburg/`;
       Startseite oder Footer „Standorte: Lüneburg · Uelzen“
@@ -155,6 +164,23 @@ Links identisch zur Lüneburg-Seite bleiben; bei Bedarf `FUNNEL_URL` in `tools/b
       lokale Presse (AZ Uelzen), Vereins-/Veranstaltungssponsoring im Landkreis
 - [ ] Alt-Texte der Mediathek nach `elementor/media-alt-texte.json` prüfen (gelten site-weit, deshalb ortsneutral formuliert)
 - [ ] Nach 2–4 Wochen: Search-Console-Leistungsbericht nach „Uelzen“ filtern, Texte an echte Suchanfragen anpassen
+
+## 8a. Messwerte nach Veröffentlichung (27.10.2026, `tools/audit_live.py`)
+
+| Prüfpunkt | Wert |
+| --- | --- |
+| HTTP / Canonical / Robots | 200 · `https://provision-infra.de/uelzen/` · index, follow |
+| Titel / Description | 58 Zeichen / 153 Zeichen (Yoast, wie Abschnitt 2) |
+| H1 | 1× „Mechanische & elektronische Schließanlagen sowie Videoüberwachung in Uelzen“ |
+| Sichtbarer Text | ca. 2.100 Wörter |
+| Vorkommen | Uelzen 40 · Landkreis Uelzen 6 · Schließanlage 29 · Videoüberwachung 15 (davon „Videoüberwachung in Uelzen“ 5) · Zutrittskontrolle 5 · Bad Bevensen 11 |
+| Interne Links | `/zutrittssystem/`, `/kamerasysteme/`, `/anfrage-auswahl/`, `tel:`, `mailto:` |
+| Schema | Yoast WebPage/BreadcrumbList/WebSite · ProvenExpert Product · eigenes LocalBusiness+Locksmith mit 2× Service · EA FAQPage (11 Fragen) |
+| Bilder ohne Alt | 10 (dekorative Linien/Icons, wie auf /lueneburg/) |
+
+Hinweis: Die exakte Phrase „Schließanlagen Uelzen“ steht nur im Titel; im Text wird sie natürlich getrennt verwendet
+(„Schließanlagen & Zutrittskontrolle in Uelzen“, „Schließanlage in Uelzen“). Yoast wertet das bei flexibler
+Keyphrase-Erkennung, Google ohnehin.
 
 ## 9. Erfolgsmessung
 
