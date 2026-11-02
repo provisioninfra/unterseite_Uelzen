@@ -440,7 +440,7 @@
      "left": "20",
      "isLinked": false
     },
-    "background_video_link": "https://provision-infra.de/wp-content/uploads/2026/05/Main-Banner-Video-new-2.mp4",
+    "background_video_link": "https://provision-infra.de/wp-content/uploads/2026/11/startseite-hero-tuer-desktop-2160.mp4",
     "padding_tablet": {
      "unit": "px",
      "top": "150",
@@ -1696,7 +1696,7 @@
      "sizes": []
     },
     "background_background": "video",
-    "background_video_link": "https://provision-infra.de/wp-content/uploads/2026/05/Main-Banner-Video-6.mp4",
+    "background_video_link": "https://provision-infra.de/wp-content/uploads/2026/11/startseite-hero-tuer-handy-1440.mp4",
     "background_play_on_mobile": "yes",
     "hide_laptop": "hidden-laptop",
     "custom_css": "@media (min-width: 475px) and (max-width: 787px) {\nselector{\n    min-height: 700px;\n}\n    \n    \n}",
@@ -1775,7 +1775,7 @@
      "size": "",
      "sizes": []
     },
-    "background_video_link": "https://provision-infra.de/wp-content/uploads/2026/05/Main-Banner-Video-6.mp4",
+    "background_video_link": "https://provision-infra.de/wp-content/uploads/2026/11/startseite-hero-tuer-handy-1440.mp4",
     "background_play_on_mobile": "yes",
     "hide_widescreen": "hidden-widescreen",
     "hide_desktop": "hidden-desktop",
@@ -42862,6 +42862,49 @@
     }
    ],
    "isInner": false
+  },
+  {
+   "id": "d559b79",
+   "elType": "container",
+   "isInner": false,
+   "settings": {
+    "content_width": "full",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": false
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": false
+    },
+    "min_height": {
+     "unit": "px",
+     "size": 0,
+     "sizes": []
+    },
+    "_title": "Querformat + Hero-Video (Steuerung)"
+   },
+   "elements": [
+    {
+     "id": "f106902",
+     "elType": "widget",
+     "widgetType": "html",
+     "isInner": false,
+     "elements": [],
+     "settings": {
+      "html": "<!-- ProVision Infra: Handy-Querformat (feste Überlagerungen) und Hero-Hintergrundvideos (einmal abspielen, beim Zurückscrollen erneut, Nachstart bei blockiertem Autoplay). Gilt seitenweit, Kamera-Seite (4313) hat eigene Videosteuerung. Stand 02.11.2026 -->\n<style id=\"pv-querformat\">\n/* Handy im Querformat: wenig Höhe, feste Elemente verdecken sonst Text. Nur Viewports bis 520 px Höhe im Querformat. */\n@media (orientation: landscape) and (max-height: 520px) {\n  #pe-badge-fixed { display: none !important; }          /* festes ProvenExpert-Siegel unten rechts; Siegel bleibt in Hero und Footer sichtbar */\n  .brlbs-cmpnt-widget { transform: scale(.62); transform-origin: bottom left; }  /* Cookie-Symbol unten links kleiner */\n}\n</style>\n<script id=\"pv-hero-video\">\n(function () {\n  if (document.body.classList.contains('elementor-editor-active')) return;\n  if (document.body.classList.contains('page-id-4313')) return; // Kamera-Seite: eigene Steuerung im Seitenende\n  var SEL = 'video.elementor-background-video-hosted';\n  function sichtbar(el) { return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length); }\n  function fragment(video) { // Ausschnitt #t=start,end aus der Videoquelle (Elementor: Start-/Endzeit)\n    var m = /#t=([\\d.]*)(?:,([\\d.]+))?/.exec(video.currentSrc || video.src || video.getAttribute('src') || '');\n    return { start: m && m[1] ? parseFloat(m[1]) : 0, end: m && m[2] ? parseFloat(m[2]) : null };\n  }\n  function durchgelaufen(video) {\n    var f = fragment(video);\n    return f.end ? video.currentTime >= f.end - 0.1 : video.ended;\n  }\n  function abspielen(video) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }\n\n  // 1) Verstecktes Video nicht laden (z. B. Handy-Block am Computer, Computer-Hero am Handy): Elementor setzt die\n  //    Quelle erst später; ohne autoplay und mit preload=none bleibt der Download aus, bis der Block sichtbar wird.\n  function ladeSteuerung() {\n    document.querySelectorAll(SEL).forEach(function (video) {\n      var c = video.closest('.elementor-background-video-container'); if (!c) return;\n      if (!sichtbar(c)) {\n        if (!video.__pvGebremst) { video.__pvGebremst = true; video.removeAttribute('autoplay'); video.preload = 'none'; }\n        if (!video.paused) video.pause();\n      } else if (video.__pvGebremst) {\n        video.__pvGebremst = false; video.preload = 'auto'; video.setAttribute('autoplay', '');\n        if (video.getAttribute('src')) { try { video.load(); } catch (e) {} abspielen(video); }\n      }\n    });\n  }\n\n  // 2) Einmal abspielen, letztes Bild stehen lassen, nach Verlassen und Zurückkehren des Bereichs erneut abspielen\n  function steuern(video) {\n    if (video.__pvGesteuert) return; video.__pvGesteuert = true;\n    var container = video.closest('.elementor-background-video-container');\n    var bereich = (container && container.closest('.elementor-element')) || container || video;\n    var warAusserhalb = false;\n    video.loop = false;\n    video.addEventListener('ended', function () { setTimeout(function () { video.style.display = ''; }, 0); }); // Elementor blendet nach dem Ende aus\n    video.addEventListener('timeupdate', function () { var f = fragment(video); if (f.end && !video.paused && video.currentTime >= f.end - 0.05) video.pause(); });\n    if (!('IntersectionObserver' in window)) return;\n    new IntersectionObserver(function (eintraege) {\n      eintraege.forEach(function (e) {\n        if (!e.isIntersecting) { warAusserhalb = true; return; }\n        if (!warAusserhalb) return;\n        warAusserhalb = false;\n        if (!container || !sichtbar(container) || !video.getAttribute('src')) return;\n        video.style.display = '';\n        try { video.currentTime = fragment(video).start || 0; } catch (err) {}\n        abspielen(video);\n      });\n    }, { threshold: 0 }).observe(bereich);\n  }\n\n  // 3) Hat das Gerät den automatischen Start unterbunden (z. B. Stromsparmodus), bei der ersten Berührung starten\n  function nachstarten() {\n    document.querySelectorAll(SEL).forEach(function (video) {\n      var c = video.closest('.elementor-background-video-container');\n      if (!c || !sichtbar(c) || !video.paused || !video.getAttribute('src') || durchgelaufen(video)) return;\n      abspielen(video);\n    });\n  }\n  ['touchend', 'click', 'keydown'].forEach(function (ev) { document.addEventListener(ev, nachstarten, { passive: true, capture: true }); });\n\n  function start() { ladeSteuerung(); document.querySelectorAll(SEL).forEach(steuern); }\n  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();\n  window.addEventListener('load', function () { setTimeout(start, 800); }); // Elementor bindet Hintergrundvideos erst nach dem Laden seiner Skripte an\n  window.addEventListener('resize', function () { clearTimeout(window.__pvResize); window.__pvResize = setTimeout(ladeSteuerung, 250); });\n  window.addEventListener('orientationchange', function () { setTimeout(ladeSteuerung, 400); });\n})();\n</script>\n",
+      "_title": "Querformat + Hero-Video (Steuerung)"
+     }
+    }
+   ]
   }
  ],
  "settings": {

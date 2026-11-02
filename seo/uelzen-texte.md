@@ -426,3 +426,5 @@ Ja. Nach der Übergabe bleiben wir dein Ansprechpartner: Erweiterungen, Nachschl
  ]
 }
 ```
+
+## Abschnitt Querformat + Hero-Video (Steuerung)

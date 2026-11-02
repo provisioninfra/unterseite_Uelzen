@@ -24,6 +24,13 @@ SITE = 'https://provision-infra.de'
 SLUG = 'uelzen'
 PAGE_URL = f'{SITE}/{SLUG}/'
 FUNNEL_URL = '/anfrage-auswahl/'      # gemeinsamer Funnel aller Stadtseiten (Formular „Funnel Auswahl“, ID 5)
+# Hero-Videos: kleine Fassungen (02.11.2026, 1,9 MB / 0,8 MB statt 13,8 MB / 15,4 MB, SSIM > 0,99 zum Original)
+VIDEO_NEU = {
+    'https://provision-infra.de/wp-content/uploads/2026/05/Main-Banner-Video-new-2.mp4': 'https://provision-infra.de/wp-content/uploads/2026/11/startseite-hero-tuer-desktop-2160.mp4',
+    'https://provision-infra.de/wp-content/uploads/2026/05/Main-Banner-Video-6.mp4': 'https://provision-infra.de/wp-content/uploads/2026/11/startseite-hero-tuer-handy-1440.mp4',
+}
+# Seitenweites Steuer-Snippet (Handy-Querformat, Hero-Video); liegt als HTML-Widget am Seitenende, siehe tools/seitenweit-querformat-hero-video.html
+SNIPPET = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'seitenweit-querformat-hero-video.html'), encoding='utf-8').read()
 MENU_SLUG = 'menue-uelzen'            # WordPress-Menü „Menü Uelzen“ (muss in WP angelegt werden, Name mit „Me…“ beginnen)
 
 
@@ -299,6 +306,11 @@ replace_text(els, TEXT)
 missed = set(TEXT) - TEXT.hits
 assert not missed, 'Quelltexte nicht gefunden (Lüneburg-Quelle geändert?):\n' + '\n'.join(sorted(missed))
 
+# Hero-Videos auf die kleinen Fassungen umstellen (Start-/Endzeit und alle anderen Einstellungen bleiben)
+video_map = Mapping(VIDEO_NEU)
+replace_text(els, video_map)
+assert video_map.hits == set(VIDEO_NEU), 'Video-URLs nicht gefunden'
+
 # FAQ-Einträge neu aufsetzen (Vorlage: erster Eintrag der Lüneburg-Seite)
 acc = find(els, 'ed852c3')['settings']
 tmpl = acc['eael_adv_accordion_tab'][0]
@@ -316,6 +328,14 @@ set_setting(els, 'f058554', 'html', '<script type="application/ld+json">' + json
 # Hero-Überschriften: Elementor-Editor-Label für die Übersicht im Navigator
 set_setting(els, '9dcea29', '_title', 'H1 Schließanlagen & Videoüberwachung Uelzen')
 set_setting(els, 'e429076', '_title', 'Hero-Text Uelzen')
+
+# Steuer-Snippet als eigener Container am Seitenende (wie „Strukturierte Daten“: ohne Abstände, Höhe 0)
+els.append({'id': new_id(), 'elType': 'container', 'isInner': False,
+            'settings': {'content_width': 'full', 'padding': {'unit': 'px', 'top': '0', 'right': '0', 'bottom': '0', 'left': '0', 'isLinked': False},
+                         'margin': {'unit': 'px', 'top': '0', 'right': '0', 'bottom': '0', 'left': '0', 'isLinked': False},
+                         'min_height': {'unit': 'px', 'size': 0, 'sizes': []}, '_title': 'Querformat + Hero-Video (Steuerung)'},
+            'elements': [{'id': new_id(), 'elType': 'widget', 'widgetType': 'html', 'isInner': False, 'elements': [],
+                          'settings': {'html': SNIPPET, '_title': 'Querformat + Hero-Video (Steuerung)'}}]})
 
 # ---- Prüfungen
 ids = [e['id'] for root in els for e in walk(root)]

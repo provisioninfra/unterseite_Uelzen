@@ -15,6 +15,8 @@ die FAQ, das Schema-Markup und die SEO-Werte sind neu für Uelzen geschrieben (k
 | Pfad | Zweck |
 | --- | --- |
 | `elementor/uelzen.elementor.json` | Elementor-Elemente + Seiteneinstellungen + Yoast-Werte der Uelzen-Seite (Ergebnis des Builds) |
+| `elementor/uelzen.live-2026-11-02.json` | Live-Stand der Seite nach dem Eingriff vom 02.11.2026 (Export aus dem Editor); enthält zusätzlich die in WordPress nachträglich eingebaute vierte Kundenstimme und den Absatz mit Links auf /lueneburg/ und die Startseite im Standort-Text |
+| `tools/seitenweit-querformat-hero-video.html` | Steuer-Snippet (CSS + JS) für Handy-Querformat und Hero-Video, liegt als HTML-Widget am Seitenende aller Landingpages; Hintergrund im Kamera-Repo `QUERFORMAT-UND-HERO-VIDEO.md` |
 | `elementor/quelle-lueneburg.elementor.json` | Quelle: Elementor-Daten der Live-Seite /lueneburg/ (Stand 26.10.2026, nur lesen) |
 | `elementor/geo.json` | Geokoordinaten des Firmensitzes (für `LocalBusiness.geo`) |
 | `elementor/media-alt-texte.json` | Alt-Texte der verwendeten Mediathek-Bilder (site-weit gültig, deshalb ortsneutral) |
@@ -25,6 +27,24 @@ die FAQ, das Schema-Markup und die SEO-Werte sind neu für Uelzen geschrieben (k
 
 Formulare und Funnel-Seiten werden nicht dupliziert: alle CTAs führen auf den gemeinsamen Funnel `/anfrage-auswahl/`
 (Gravity Form 5), der laut Lüneburg-Konzept für alle Stadtseiten gedacht ist.
+
+## Änderungen vom 02.11.2026 (live)
+
+- Hero-Videos auf kleine Fassungen umgestellt: Desktop `startseite-hero-tuer-desktop-2160.mp4` (1,9 MB statt 13,8 MB),
+  Handy `startseite-hero-tuer-handy-1440.mp4` (0,8 MB statt 15,4 MB); Start-/Endzeiten unverändert. Der Build setzt die
+  URLs über `VIDEO_NEU` in `tools/build_uelzen.py`.
+- Steuer-Snippet als letzter Container: blendet im Handy-Querformat das feste ProvenExpert-Siegel aus und verkleinert das
+  Cookie-Symbol, lädt unsichtbare Hero-Videos nicht, spielt das Hero-Video einmal und nach dem Zurückscrollen erneut ab
+  und startet es bei blockiertem Autoplay (Stromsparmodus) mit der ersten Berührung.
+- Achtung: Die Live-Seite wurde nach dem Build vom 27.10. direkt in WordPress erweitert (vierte Kundenstimme „Vincent
+  Oswald“, Absatz mit internen Links im Standort-Text). Der Build bildet das nicht ab; für Änderungen an der Live-Seite
+  immer vom Editor-Export ausgehen (`elementor/uelzen.live-2026-11-02.json`).
+- Am 02.11.2026 hat parallel die Sitzung „Neue Unterseite mit Videoüberwachung“ (Kamera-Repo) auf derselben Seite einen
+  eigenen Container „Steuerung Ladeverhalten“ (unsichtbare Lottie-/Video-Blöcke nicht laden, ProvenExpert-Product-Schema
+  aus dem DOM entfernen) ergänzt und am Siegel-Widget die Handy-Ausblendung entfernt sowie eine Querformat-Regel gesetzt.
+  Beide Steuer-Container liegen getrennt am Seitenende; vor jedem Speichern frisch exportieren und die andere Sitzung
+  informieren, sonst überschreibt der jeweils letzte Speichervorgang den anderen (so geschehen am 02.11. um 09:56 auf
+  /lueneburg/, danach wiederhergestellt).
 
 ## Design
 
