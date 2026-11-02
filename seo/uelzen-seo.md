@@ -154,7 +154,7 @@ Links identisch zur Lüneburg-Seite bleiben; bei Bedarf `FUNNEL_URL` in `tools/b
 - [ ] **Interne Verlinkung** (stärkster Hebel): Hauptmenü „Mehr“ → Uelzen (wie Lüneburg) in Header und Footer aller Seiten;
       auf `/lueneburg/` im Standort-Text „Uelzen“ auf `/uelzen/` verlinken, auf `/uelzen/` „Lüneburg“ auf `/lueneburg/`;
       Startseite oder Footer „Standorte: Lüneburg · Uelzen“
-- [ ] Google Search Console: URL-Prüfung → Live-URL testen → Indexierung beantragen; Rich-Results-Test
+- [x] Google Search Console (02.11.2026): URL-Prüfung ergab „Gefunden – zurzeit nicht indexiert“ (über `sitemap_index.xml` entdeckt), Indexierung beantragt („bevorzugte Crawling-Warteschlange“), Live-Test „URL ist für Google verfügbar, Seite kann indexiert werden“, Navigationspfade 1 gültiges Element. /lueneburg/ war bereits indexiert. Rich-Results-Test weiterhin offen
 - [ ] Bing: IndexNow-Plugin oder URL in Bing Webmaster Tools einreichen (IndexNow ohne Schlüsseldatei im Root scheitert, siehe Lüneburg)
 - [ ] Google Unternehmensprofil: Leistungsgebiet Uelzen/Landkreis Uelzen, Leistungen „Schließanlagen“, „Zutrittskontrolle“,
       „Videoüberwachung“, Beitrag mit Link auf `/uelzen/`; Bewertungen mit Ortsnennung erbitten
