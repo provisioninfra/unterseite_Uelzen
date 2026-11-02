@@ -46,6 +46,9 @@ Formulare und Funnel-Seiten werden nicht dupliziert: alle CTAs führen auf den g
   informieren, sonst überschreibt der jeweils letzte Speichervorgang den anderen (so geschehen am 02.11. um 09:56 auf
   /lueneburg/, danach wiederhergestellt).
 
+- 02.11.2026, 13:23 Uhr: Kundenstimme „Pia-Theresa“ ergänzt um die Firma („Geschäftsführerin, Digitale Hanseaten“),
+  gleichzeitig auf Startseite, /kamerasysteme/ und /lueneburg/. Im Build über das Element `426f36df` gesetzt.
+
 ## Design
 
 Farben (Kit: `#000D30`, `#263E96`, `#FBC91B`), Typografie (Poppins/Roboto) und Animationen (fadeInLeft/Right/Up,

@@ -152,7 +152,7 @@ Hausverwaltungen, Einzelhandel und Gastronomie in Uelzen: Schließplan für viel
 
 [Kundenstimme] "Was ich besonders spannend finde: Für ein junges Unternehmen bringt ProVision extrem hohe Expertise & echte Erfahrungswerte mit - die Entwicklung die das Team gerade nimmt, ist wirklich beeindruckend."
 
-[Kunde] Pia-Theresa​ – Geschäftsführerin​
+[Kunde] Pia-Theresa​ – Geschäftsführerin, Digitale Hanseaten
 
 [Kundenstimme] "Anfahrt & Durchführung waren wirklich schnelle & kompetent, diese Firma ist direkt aus Bad Bevensen und ... top! Absolut  empfehlenswert!"
 

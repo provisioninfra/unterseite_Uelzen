@@ -329,6 +329,11 @@ set_setting(els, 'f058554', 'html', '<script type="application/ld+json">' + json
 set_setting(els, '9dcea29', '_title', 'H1 Schließanlagen & Videoüberwachung Uelzen')
 set_setting(els, 'e429076', '_title', 'Hero-Text Uelzen')
 
+# Kundenstimme Pia-Theresa: Firma ergänzen (Kundenwunsch 02.11.2026, auf allen Seiten mit dieser Karte)
+pia = find(els, '426f36df')['settings']
+assert 'Pia-Theresa' in pia.get('title_text', ''), 'Kundenstimmen-Karte Pia-Theresa nicht gefunden'
+pia['description_text'] = 'Geschäftsführerin, Digitale Hanseaten'
+
 # Steuer-Snippet als eigener Container am Seitenende (wie „Strukturierte Daten“: ohne Abstände, Höhe 0)
 els.append({'id': new_id(), 'elType': 'container', 'isInner': False,
             'settings': {'content_width': 'full', 'padding': {'unit': 'px', 'top': '0', 'right': '0', 'bottom': '0', 'left': '0', 'isLinked': False},
